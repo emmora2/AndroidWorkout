@@ -1,6 +1,7 @@
 package com.example.workoutapi.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.workoutapi.R
 import com.example.workoutapi.models.Workouts
+import com.example.workoutapi.workout_date_selection
 
 class WorkoutItemAdapter(private val context : Context, private val dataSet: List<Workouts>) : RecyclerView.Adapter<WorkoutItemAdapter.ItemViewHolder>() {
 
@@ -29,19 +31,17 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
-
         val item = dataSet[position];
 
         holder.textView.text = item.name;
 
         holder.muscleGroupTextView.text = item.muscle
 
-
         holder.addWorkoutBtn.setOnClickListener{
-            println("workout selected was " + item.name);
+            val dateSelectionIntent = Intent(context, workout_date_selection::class.java)
+            dateSelectionIntent.putExtra("workoutName", item.name);
+            context.startActivity(dateSelectionIntent);
         }
-
-        //TODO go to new activity and add workout to date
 
     }
 
