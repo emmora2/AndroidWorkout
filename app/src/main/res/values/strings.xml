@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">WorkoutApi</string>
+    <string-array name="workout_muscle">
+        <item>Abdominals</item>
+        <item>Abductors</item>
+        <item>Adductors</item>
+        <item>biceps</item>
+        <item>Calves</item>
+        <item>Chest</item>
+        <item>Forearms</item>
+        <item>Glutes</item>
+        <item>Hamstrings</item>
+        <item>Lats</item>
+        <item>Lower_back</item>
+        <item>Middle_back</item>
+        <item>Neck</item>
+        <item>Quadriceps</item>
+        <item>Traps</item>
+        <item>Triceps</item>
+    </string-array>
+</resources>
