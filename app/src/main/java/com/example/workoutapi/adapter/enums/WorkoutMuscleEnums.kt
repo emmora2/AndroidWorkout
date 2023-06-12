@@ -1,4 +1,4 @@
-package com.example.workoutapi.enums
+package com.example.workoutapi.adapter.enums
 
 enum class WorkoutMuscleEnums(query : String) {
     Abdominals("abdominals"),
