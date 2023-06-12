@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var spinner : Spinner;
 
-    private lateinit var workoutData : MutableList<Workouts>;
+    private  var workoutData : MutableList<Workouts> = mutableListOf();
 
     private lateinit var recyclerView : RecyclerView;
 
@@ -37,12 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         setSpinner();
 
-
         recyclerView = findViewById(R.id.workout_recycler_view)
-
-        runBlocking {
-            workoutData =  WorkoutApi.retrofitService.getWorkout("abdominals")
-        }
 
         workoutDataAdapter = WorkoutItemAdapter(this, workoutData);
 
@@ -54,13 +49,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-    suspend fun getPhotos(workoutName : String) {
-
-         val results =  WorkoutApi.retrofitService.getWorkout("abductors");
-
-        println("results are " + results);
-    }
 
 
     fun setSpinner() {
@@ -75,20 +63,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateData(newQuery : String) {
+
         runBlocking {
             val workouts  =  WorkoutApi.retrofitService.getWorkout(newQuery)
             workoutData.clear()
             workoutData.addAll(workouts);
         }
 
-
-
-
-
-
         workoutDataAdapter.notifyDataSetChanged();
 
-        println("update data was called");
     }
 
 

@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.workoutapi.R
 import com.example.workoutapi.models.Workouts
-import com.example.workoutapi.workout_date_selection
+import com.example.workoutapi.WorkoutDateSelectionActivity
 
 class WorkoutItemAdapter(private val context : Context, private val dataSet: List<Workouts>) : RecyclerView.Adapter<WorkoutItemAdapter.ItemViewHolder>() {
 
@@ -38,7 +37,7 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
         holder.muscleGroupTextView.text = item.muscle
 
         holder.addWorkoutBtn.setOnClickListener{
-            val dateSelectionIntent = Intent(context, workout_date_selection::class.java)
+            val dateSelectionIntent = Intent(context, WorkoutDateSelectionActivity::class.java)
             dateSelectionIntent.putExtra("workoutName", item.name);
             context.startActivity(dateSelectionIntent);
         }
