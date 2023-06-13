@@ -17,8 +17,8 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
 
     private  val intentKey : String  = "workoutName";
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView : TextView = view.findViewById(R.id.workout_list_item)
-        val muscleGroupTextView : TextView = view.findViewById(R.id.muscle_group_tv)
+        val textView : TextView = view.findViewById(R.id.tv_workout_name)
+        val muscleGroupTextView : TextView = view.findViewById(R.id.tv_muscle_group)
         val addWorkoutBtn : Button = view.findViewById(R.id.btn_add_workout);
     }
 
@@ -34,9 +34,9 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
 
         val item = dataSet[position];
 
-        holder.textView.text = item.name;
+        holder.textView.text = item.muscle;
 
-        holder.muscleGroupTextView.text = item.muscle
+        holder.muscleGroupTextView.text = item.name
 
         holder.addWorkoutBtn.setOnClickListener{
 
