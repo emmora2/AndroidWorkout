@@ -1,5 +1,6 @@
 package com.example.workoutapi
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -8,22 +9,28 @@ import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import java.text.SimpleDateFormat
+import com.example.workoutapi.database.workout.AppDatabase
+import com.example.workoutapi.database.workout.entities.Workouts
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.ZoneId
-import java.time.ZoneOffset
 
 class WorkoutDateSelectionActivity : AppCompatActivity(), OnDateChangeListener {
 
 
+    private val intentWorkoutKey : String = "workoutName"
+
     private lateinit var calendar : CalendarView;
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+
+    private val context : Context = this;
+
     private var selectedWorkoutDate : LocalDate = LocalDate.now();
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_workout_date_selection)
@@ -32,19 +39,23 @@ class WorkoutDateSelectionActivity : AppCompatActivity(), OnDateChangeListener {
 
         this.calendar = findViewById(R.id.calendar_view_workout_date);
 
+        calendar.setOnDateChangeListener(this)
+
+
         val instant : Instant = Instant.ofEpochSecond(calendar.date)
 
         instant.atZone(ZoneId.systemDefault()).toLocalDate()
 
+        val selectedWorkoutText = intent.extras?.getString(intentWorkoutKey).toString();
 
-        calendar.setOnDateChangeListener(this)
+
 
         btnSave.setOnClickListener{
 
-            println("seleted date is " + selectedWorkoutDate.toString())
+            insertWorkout(selectedWorkoutText, selectedWorkoutDate.toString())
 
-            val mainActivityIntent = Intent(this, MainActivity::class.java)
-            this.startActivity(mainActivityIntent);
+            returnToMainActivity();
+
         }
 
     }
@@ -54,6 +65,24 @@ class WorkoutDateSelectionActivity : AppCompatActivity(), OnDateChangeListener {
 
         selectedWorkoutDate = LocalDate.of(year, month +1, dayOfMonth  );
 
+    }
+
+    fun returnToMainActivity() {
+
+        val mainActivityIntent = Intent(this, MainActivity::class.java)
+        this.startActivity(mainActivityIntent);
+
+    }
+
+    fun insertWorkout(workoutName : String, workoutDate : String) {
+
+        coroutineScope.launch {
+
+            val db : AppDatabase = AppDatabase.getDatabase(context);
+
+            db.workoutData().insert(Workouts(null,workoutDate, workoutName))
+
+        }
     }
 
 

@@ -14,8 +14,13 @@
         android:theme="@style/Theme.WorkoutApi"
         tools:targetApi="31">
         <activity
+            android:name=".SelectedWorkoutsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_selected_workouts"
+            android:theme="@style/Theme.WorkoutApi" />
+        <activity
             android:name=".WorkoutDateSelectionActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

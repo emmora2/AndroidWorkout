@@ -2,6 +2,7 @@ package com.example.workoutapi.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.example.workoutapi.WorkoutDateSelectionActivity
 
 class WorkoutItemAdapter(private val context : Context, private val dataSet: List<Workouts>) : RecyclerView.Adapter<WorkoutItemAdapter.ItemViewHolder>() {
 
+    private  val intentKey : String  = "workoutName";
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val textView : TextView = view.findViewById(R.id.workout_list_item)
         val muscleGroupTextView : TextView = view.findViewById(R.id.muscle_group_tv)
@@ -37,8 +39,12 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
         holder.muscleGroupTextView.text = item.muscle
 
         holder.addWorkoutBtn.setOnClickListener{
+
+            val extras = Bundle();
+
+            extras.putString(intentKey, item.name);
             val dateSelectionIntent = Intent(context, WorkoutDateSelectionActivity::class.java)
-            dateSelectionIntent.putExtra("workoutName", item.name);
+            dateSelectionIntent.putExtras(extras);
             context.startActivity(dateSelectionIntent);
         }
 

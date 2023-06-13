@@ -18,4 +18,5 @@
         <item>Traps</item>
         <item>Triceps</item>
     </string-array>
+    <string name="title_activity_selected_workouts">SelectedWorkoutsActivity</string>
 </resources>

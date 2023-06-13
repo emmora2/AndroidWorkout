@@ -3,7 +3,7 @@ package com.example.workoutapi.database.workout
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.workoutapi.dto.WorkoutDto
+import com.example.workoutapi.database.workout.entities.Workouts
 
 
 @Dao

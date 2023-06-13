@@ -16,7 +16,13 @@ import com.example.workoutapi.network.WorkoutApiService
 import com.example.workoutapi.spinner.SpinnerActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +32,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView : RecyclerView;
 
+    private  val coroutineScope : CoroutineScope = CoroutineScope(Dispatchers.IO);
+
+    private val coroutineMain : CoroutineScope = CoroutineScope(Dispatchers.Main);
 
     private lateinit var workoutDataAdapter : WorkoutItemAdapter;
 
@@ -52,28 +61,36 @@ class MainActivity : AppCompatActivity() {
 
 
     fun setSpinner() {
+
         spinner = findViewById(R.id.workout_spinner)
 
         ArrayAdapter.createFromResource(this, R.array.workout_muscle, android.R.layout.simple_spinner_item).also {
                 adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter;
+            spinner.adapter = adapter
         }
 
     }
 
-    fun updateData(newQuery : String) {
+     fun updateData(newQuery : String)  {
 
-        runBlocking {
-            val workouts  =  WorkoutApi.retrofitService.getWorkout(newQuery)
-            workoutData.clear()
-            workoutData.addAll(workouts);
-        }
+         runBlocking {
+             val workouts  =  WorkoutApi.retrofitService.getWorkout(newQuery)
 
-        workoutDataAdapter.notifyDataSetChanged();
+             workoutData.clear()
+
+             workoutData.addAll(workouts)
+
+             workoutDataAdapter.notifyDataSetChanged()
+
+         }
+
+     }
+
+
 
     }
 
 
 
-}
+
