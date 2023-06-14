@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
+import com.example.workoutapi.adapter.SelectedWorkoutsAdapter
 import com.example.workoutapi.database.workout.AppDatabase
 import com.example.workoutapi.database.workout.entities.Workouts
 import kotlinx.coroutines.CoroutineScope
@@ -25,7 +26,8 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_selected_workouts)
 
-       // val rvSelectedWorkouts: RecyclerView = findViewById(R.id.rv_selected_workouts);
+
+        val rvSelectedWorkouts : RecyclerView = findViewById(R.id.rv_selected_workouts);
 
         coroutineScope.launch {
 
@@ -37,13 +39,16 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
                 groupWorkoutsByDate()
         }
 
-        // display data source to adapter
+        val selectedWorkoutsAdapter = SelectedWorkoutsAdapter(this, groupedWorkouts)
+
+
+        rvSelectedWorkouts.adapter = selectedWorkoutsAdapter;
+
+        rvSelectedWorkouts.setHasFixedSize(true);
+
 
     }
 
-
-
-    //TODO parse workouts and
 
     fun groupWorkoutsByDate() {
 
@@ -70,7 +75,6 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
 
         }
 
-        println(groupedWorkouts);
     }
 
 }

@@ -28,10 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView : RecyclerView;
 
-    private  val coroutineScope : CoroutineScope = CoroutineScope(Dispatchers.IO);
-
-    private val coroutineMain : CoroutineScope = CoroutineScope(Dispatchers.Main);
-
     private lateinit var workoutDataAdapter : WorkoutItemAdapter;
 
     override fun onCreate(savedInstanceState: Bundle?) {
