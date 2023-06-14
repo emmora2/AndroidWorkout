@@ -1,26 +1,22 @@
 package com.example.workoutapi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.SearchEvent
-import android.view.View
+
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
+
 import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapi.adapter.WorkoutItemAdapter
 import com.example.workoutapi.models.Workouts
 import com.example.workoutapi.network.WorkoutApi
-import com.example.workoutapi.network.WorkoutApiService
 import com.example.workoutapi.spinner.SpinnerActivity
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.joinAll
-import kotlinx.coroutines.launch
+
 import kotlinx.coroutines.runBlocking
 
 
@@ -45,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSpinner();
+
+        setViewWorkoutListener();
 
         recyclerView = findViewById(R.id.workout_recycler_view)
 
@@ -86,6 +84,19 @@ class MainActivity : AppCompatActivity() {
          }
 
      }
+
+
+    fun setViewWorkoutListener() {
+
+        val btnViewWorkouts : Button = findViewById(R.id.btn_view_workouts);
+
+        btnViewWorkouts.setOnClickListener{
+
+            val selectedWorkoutsIntent = Intent(this, SelectedWorkoutsActivity::class.java )
+
+            this.startActivity(selectedWorkoutsIntent);
+        }
+    }
 
 
 

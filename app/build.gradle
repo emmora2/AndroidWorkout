@@ -8,6 +8,10 @@ android {
     namespace 'com.example.workoutapi'
     compileSdk 33
 
+    kapt {
+        correctErrorTypes true
+    }
+
     defaultConfig {
         applicationId "com.example.workoutapi"
         minSdk 26
