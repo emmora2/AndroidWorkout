@@ -34,17 +34,8 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
                 workouts.clear()
                 workouts.addAll(allWorkouts)
 
-
                 groupWorkoutsByDate()
-
         }
-
-
-
-        //Todo get selected workouts from database sorted by date ascending
-
-
-        //Todo group workouts by date
 
         // display data source to adapter
 
@@ -59,8 +50,6 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
 
         var workoutList = mutableListOf<Workouts>()
 
-        val grouped = mutableListOf<MutableList<Workouts>>()
-
 
         for(workout in workouts.orEmpty() ) {
 
@@ -73,7 +62,7 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
 
                 if(workoutList.size > 0){
                     groupedWorkouts.add(workoutList)
-                    workoutList.clear();
+                    workoutList = mutableListOf()
                 }
 
                 workoutList.add(workout);
@@ -81,7 +70,7 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
 
         }
 
-        println(grouped);
+        println(groupedWorkouts);
     }
 
 }
