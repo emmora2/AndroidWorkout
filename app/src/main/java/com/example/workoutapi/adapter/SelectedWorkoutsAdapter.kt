@@ -37,9 +37,8 @@ class SelectedWorkoutsAdapter(val context : Context , val dataset: MutableList<M
 
         workoutNames.forEachIndexed{ index ,element ->
 
-            //create a textview for date
-
             val textView  = TextView(holder.itemView.context);
+
             textView.setText(element);
 
 //            val dateView  = TextView(holder.itemView.context);

@@ -2,12 +2,10 @@ package com.example.workoutapi
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.workoutapi.database.workout.AppDatabase
 import com.example.workoutapi.database.workout.entities.Workouts
@@ -41,14 +39,11 @@ class WorkoutDateSelectionActivity : AppCompatActivity(), OnDateChangeListener {
 
         calendar.setOnDateChangeListener(this)
 
-
         val instant : Instant = Instant.ofEpochSecond(calendar.date)
 
         instant.atZone(ZoneId.systemDefault()).toLocalDate()
 
         val selectedWorkoutText = intent.extras?.getString(intentWorkoutKey).toString();
-
-
 
         btnSave.setOnClickListener{
 
@@ -60,7 +55,6 @@ class WorkoutDateSelectionActivity : AppCompatActivity(), OnDateChangeListener {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onSelectedDayChange(view: CalendarView, year: Int, month: Int, dayOfMonth: Int) {
 
         selectedWorkoutDate = LocalDate.of(year, month +1, dayOfMonth  );

@@ -56,8 +56,9 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
         for(workout in workouts.orEmpty() ) {
 
             if(workoutList.getOrNull(0)?.workoutDate == workout.workoutDate){
-                // reset grouped workouts and add to
+
                 workoutList.add(workout);
+
             } else {
 
                 if(workoutList.size > 0){
@@ -65,8 +66,6 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
                     workoutList = mutableListOf()
                 }
                 workoutList.add(workout);
-                // add date to end of workout list
-
 
             }
 
