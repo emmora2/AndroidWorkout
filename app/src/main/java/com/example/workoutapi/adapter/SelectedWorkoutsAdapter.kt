@@ -30,13 +30,32 @@ class SelectedWorkoutsAdapter(val context : Context , val dataset: MutableList<M
 
         val workoutNames = workouts.map {it.workoutName}
 
-        workoutNames.forEach{
-            val textView : TextView = TextView(holder.itemView.context);
-            textView.setText(it);
+        val dateView  = TextView(holder.itemView.context);
+        dateView.setText(workouts[0].workoutDate);
 
-            val container : ViewGroup = holder.itemView.findViewById(R.id.cl_selected_workouts)
+        holder.itemView.findViewById<ViewGroup>(R.id.selected_workouts).addView(dateView)
+
+        workoutNames.forEachIndexed{ index ,element ->
+
+            //create a textview for date
+
+            val textView  = TextView(holder.itemView.context);
+            textView.setText(element);
+
+//            val dateView  = TextView(holder.itemView.context);
+//
+//            dateView.setText(workouts[index].workoutDate);
+
+//            val layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
+//
+//            layoutParams.setMargins(10,10,10,10);
+//
+//            textView.setLayoutParams(layoutParams);
+
+            val container : ViewGroup = holder.itemView.findViewById(R.id.selected_workouts)
 
             container.addView(textView);
+//            container.addView(dateView);
 
         }
     }

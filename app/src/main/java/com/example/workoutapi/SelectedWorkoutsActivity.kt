@@ -22,10 +22,12 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
 
     private val groupedWorkouts : MutableList<MutableList<Workouts>> = mutableListOf();
 
+    private val selectedWorkoutsAdapter = SelectedWorkoutsAdapter(this, groupedWorkouts);
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_selected_workouts)
 
+        setContentView(R.layout.activity_selected_workouts)
 
         val rvSelectedWorkouts : RecyclerView = findViewById(R.id.rv_selected_workouts);
 
@@ -37,13 +39,10 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
                 workouts.addAll(allWorkouts)
 
                 groupWorkoutsByDate()
+
         }
 
-        val selectedWorkoutsAdapter = SelectedWorkoutsAdapter(this, groupedWorkouts)
-
-
         rvSelectedWorkouts.adapter = selectedWorkoutsAdapter;
-
         rvSelectedWorkouts.setHasFixedSize(true);
 
 
@@ -52,28 +51,32 @@ class SelectedWorkoutsActivity : AppCompatActivity() {
 
     fun groupWorkoutsByDate() {
 
-
         var workoutList = mutableListOf<Workouts>()
-
 
         for(workout in workouts.orEmpty() ) {
 
             if(workoutList.getOrNull(0)?.workoutDate == workout.workoutDate){
                 // reset grouped workouts and add to
-
                 workoutList.add(workout);
-
             } else {
 
                 if(workoutList.size > 0){
                     groupedWorkouts.add(workoutList)
                     workoutList = mutableListOf()
                 }
-
                 workoutList.add(workout);
+                // add date to end of workout list
+
+
             }
 
         }
+
+        if(workoutList.size > 0 ){
+            groupedWorkouts.add(workoutList);
+        }
+
+        workoutList = mutableListOf();
 
     }
 
