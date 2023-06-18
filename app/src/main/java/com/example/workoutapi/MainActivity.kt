@@ -36,19 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        setSpinner();
-
-        setViewWorkoutListener();
-
-        recyclerView = findViewById(R.id.workout_recycler_view)
-
-        workoutDataAdapter = WorkoutItemAdapter(this, workoutData);
-
-        recyclerView.adapter = workoutDataAdapter;
-
-        recyclerView.setHasFixedSize(true);
-
-        spinner.onItemSelectedListener = SpinnerActivity(::updateData);
 
     }
 
