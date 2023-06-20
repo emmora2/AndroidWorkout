@@ -39,50 +39,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
-    fun setSpinner() {
-
-        spinner = findViewById(R.id.workout_spinner)
-
-        ArrayAdapter.createFromResource(this, R.array.workout_muscle, android.R.layout.simple_spinner_item).also {
-                adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
-        }
-
-    }
-
-     fun updateData(newQuery : String)  {
-
-         runBlocking {
-             val workouts  =  WorkoutApi.retrofitService.getWorkout(newQuery)
-
-             workoutData.clear()
-
-             workoutData.addAll(workouts)
-
-             workoutDataAdapter.notifyDataSetChanged()
-
-         }
-
-     }
-
-
-    fun setViewWorkoutListener() {
-
-        val btnViewWorkouts : Button = findViewById(R.id.btn_view_workouts);
-
-        btnViewWorkouts.setOnClickListener{
-
-            val selectedWorkoutsIntent = Intent(this, SelectedWorkoutsActivity::class.java )
-
-            this.startActivity(selectedWorkoutsIntent);
-        }
-    }
-
-
-
     }
 
 

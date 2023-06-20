@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    app:defaultNavHost="true"
+    tools:context=".MainActivity"
+    app:navGraph="@navigation/nav_graph"
+    android:name="androidx.navigation.fragment.NavHostFragment"
+    >
 
-    <fragment
-        android:id="@+id/fragment_view_workouts"
-        android:name="com.example.workoutapi.ViewWorkoutsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+<!--    <fragment-->
+<!--        android:id="@+id/fragment_view_workouts"-->
+<!--        android:name="com.example.workoutapi.ViewWorkoutsFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintLeft_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        />-->
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.fragment.app.FragmentContainerView>
