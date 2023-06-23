@@ -56,9 +56,6 @@ class ViewWorkoutsFragment : Fragment() {
 
         recyclerView.setHasFixedSize(true);
 
-
-        setViewWorkoutListener();
-
         spinner.onItemSelectedListener = SpinnerActivity(::updateData);
 
         super.onViewCreated(view, savedInstanceState)
@@ -96,17 +93,7 @@ class ViewWorkoutsFragment : Fragment() {
 
     }
 
-    fun setViewWorkoutListener() {
 
-        val btnViewWorkouts : Button = binding.btnViewWorkouts
-
-        btnViewWorkouts.setOnClickListener{
-
-            val selectedWorkoutsIntent = Intent(requireContext(), SelectedWorkoutsActivity::class.java )
-
-            this.startActivity(selectedWorkoutsIntent);
-        }
-    }
 
 
 

@@ -30,14 +30,4 @@
         app:layout_constraintTop_toBottomOf="@+id/workout_spinner"
         app:layout_constraintVertical_bias="0.214" />
 
-    <Button
-        android:id="@+id/btn_view_workouts"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="View workouts"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

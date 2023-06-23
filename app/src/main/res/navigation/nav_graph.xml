@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeSelectedWorkoutsFragment">
 
-</Navigation>
+    <fragment
+        android:id="@+id/viewWorkoutsFragment"
+        android:name="com.example.workoutapi.ViewWorkoutsFragment"
+        android:label="fragment_view_workouts"
+        tools:layout="@layout/fragment_view_workouts" />
+    <fragment
+        android:id="@+id/homeSelectedWorkoutsFragment"
+        android:name="com.example.workoutapi.HomeSelectedWorkoutsFragment"
+        android:label="HomeSelectedWorkoutsFragment"
+        tools:layout="@layout/fragment_home_selected_workouts">
+        <action
+            android:id="@+id/action_homeSelectedWorkoutsFragment_to_viewWorkoutsFragment"
+            app:destination="@id/viewWorkoutsFragment" />
+    </fragment>
+</navigation>
