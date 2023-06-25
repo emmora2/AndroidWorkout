@@ -9,7 +9,11 @@
         android:id="@+id/viewWorkoutsFragment"
         android:name="com.example.workoutapi.ViewWorkoutsFragment"
         android:label="fragment_view_workouts"
-        tools:layout="@layout/fragment_view_workouts" />
+        tools:layout="@layout/fragment_view_workouts" >
+        <action
+            android:id="@+id/action_viewWorkoutsFragment_to_workoutDateSelectionFragment"
+            app:destination="@id/workoutDateSelectionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeSelectedWorkoutsFragment"
         android:name="com.example.workoutapi.HomeSelectedWorkoutsFragment"
@@ -18,5 +22,13 @@
         <action
             android:id="@+id/action_homeSelectedWorkoutsFragment_to_viewWorkoutsFragment"
             app:destination="@id/viewWorkoutsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutDateSelectionFragment"
+        android:name="com.example.workoutapi.WorkoutDateSelectionFragment"
+        android:label="WorkoutDateSelectionFragment" >
+        <action
+            android:id="@+id/action_workoutDateSelectionFragment_to_homeSelectedWorkoutsFragment"
+            app:destination="@id/homeSelectedWorkoutsFragment" />
     </fragment>
 </navigation>

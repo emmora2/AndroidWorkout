@@ -63,6 +63,8 @@ class WorkoutDateSelectionActivity : AppCompatActivity(), OnDateChangeListener {
 
     fun returnToMainActivity() {
 
+
+
         val mainActivityIntent = Intent(this, MainActivity::class.java)
         this.startActivity(mainActivityIntent);
 
