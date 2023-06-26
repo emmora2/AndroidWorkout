@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,10 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
         val textView : TextView = view.findViewById(R.id.tv_workout_name)
         val muscleGroupTextView : TextView = view.findViewById(R.id.tv_muscle_group)
         val addWorkoutBtn : Button = view.findViewById(R.id.btn_add_workout);
+        val workoutReps : EditText = view.findViewById(R.id.et_workout_reps)
+        val workoutSets : EditText = view.findViewById(R.id.et_workout_sets)
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -43,12 +48,6 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
 
             it.findNavController().navigate(action);
 
-//            val extras = Bundle();
-//
-//            extras.putString(intentKey, item.name);
-//            val dateSelectionIntent = Intent(context, WorkoutDateSelectionActivity::class.java)
-//            dateSelectionIntent.putExtras(extras);
-//            context.startActivity(dateSelectionIntent);
         }
 
     }

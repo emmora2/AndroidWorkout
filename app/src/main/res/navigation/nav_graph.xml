@@ -33,5 +33,11 @@
         <argument
             android:name="workoutName"
             app:argType="string" />
+        <argument
+            android:name="workoutReps"
+            app:argType="integer" />
+        <argument
+            android:name="workoutSets"
+            app:argType="integer" />
     </fragment>
 </navigation>

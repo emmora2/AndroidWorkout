@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<com.google.android.material.card.MaterialCardView xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,37 +14,98 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="441dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/bench_press" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="248dp"
         android:layout_gravity="bottom"
         android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="8dp">
 
+        <EditText
+            android:id="@+id/et_workout_sets"
+            android:layout_width="110dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="4dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_workout_sets"
+            />
+
+        <TextView
+            android:id="@+id/tv_workout_sets"
+            android:layout_margin="5dp"
+            android:layout_width="97dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Sets"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="24dp" />
+
         <TextView
             android:id="@+id/tv_muscle_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:padding="2dp"
-            android:textAppearance="?attr/textAppearanceHeadline6" />
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintHorizontal_bias="0.361"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_workout_reps"
+            tools:layout_editor_absoluteY="109dp" />
 
         <TextView
             android:id="@+id/tv_workout_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:padding="2dp"
-            android:textAppearance="?attr/textAppearanceBody2" />
+            android:textAppearance="?attr/textAppearanceBody2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_muscle_group"
+            android:layout_margin="5dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="150dp" />
 
         <Button
             android:id="@+id/btn_add_workout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Workout" />
-    </LinearLayout>
+            android:text="Add Workout"
+            android:textAllCaps="true"
+            app:layout_constraintTop_toBottomOf="@+id/tv_workout_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="184dp" />
+
+        <TextView
+            android:id="@+id/tv_workout_reps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginLeft="28dp"
+            android:text="Reps"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_workout_sets" />
+
+        <EditText
+            android:id="@+id/et_workout_reps"
+            android:layout_width="113dp"
+            android:layout_height="44dp"
+            android:layout_marginRight="48dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_workout_reps"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_workout_reps"
+            app:layout_constraintVertical_bias="0.272" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
