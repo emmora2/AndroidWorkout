@@ -1,17 +1,16 @@
 package com.example.workoutapi.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapi.R
+import com.example.workoutapi.ViewWorkoutsFragmentDirections
 import com.example.workoutapi.models.Workouts
-import com.example.workoutapi.WorkoutDateSelectionActivity
 
 class WorkoutItemAdapter(private val context : Context, private val dataSet: List<Workouts>) : RecyclerView.Adapter<WorkoutItemAdapter.ItemViewHolder>() {
 
@@ -40,12 +39,16 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
 
         holder.addWorkoutBtn.setOnClickListener{
 
-            val extras = Bundle();
+            val action = ViewWorkoutsFragmentDirections.actionViewWorkoutsFragmentToWorkoutDateSelectionFragment(workoutName = item.name);
 
-            extras.putString(intentKey, item.name);
-            val dateSelectionIntent = Intent(context, WorkoutDateSelectionActivity::class.java)
-            dateSelectionIntent.putExtras(extras);
-            context.startActivity(dateSelectionIntent);
+            it.findNavController().navigate(action);
+
+//            val extras = Bundle();
+//
+//            extras.putString(intentKey, item.name);
+//            val dateSelectionIntent = Intent(context, WorkoutDateSelectionActivity::class.java)
+//            dateSelectionIntent.putExtras(extras);
+//            context.startActivity(dateSelectionIntent);
         }
 
     }

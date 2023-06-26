@@ -21,16 +21,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [WorkoutDateSelectionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WorkoutDateSelectionFragment : Fragment(), OnDateChangeListener {
 
     private var _binding :  FragmentWorkoutDateSelectionBinding?  = null;
@@ -42,8 +33,6 @@ class WorkoutDateSelectionFragment : Fragment(), OnDateChangeListener {
     private lateinit var calendar : CalendarView;
 
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
-
-    private val context : Context = requireContext();
 
     private var selectedWorkoutDate : LocalDate = LocalDate.now();
 
@@ -110,7 +99,7 @@ class WorkoutDateSelectionFragment : Fragment(), OnDateChangeListener {
 
         coroutineScope.launch {
 
-            val db : AppDatabase = AppDatabase.getDatabase(context);
+            val db : AppDatabase = AppDatabase.getDatabase(requireContext());
 
             db.workoutData().insert(Workouts(null,workoutDate, workoutName))
 

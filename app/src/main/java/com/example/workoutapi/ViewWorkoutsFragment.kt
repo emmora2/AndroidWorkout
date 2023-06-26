@@ -66,7 +66,7 @@ class ViewWorkoutsFragment : Fragment() {
         _binding = null;
     }
 
-    fun setSpinner() {
+    private fun setSpinner() {
 
         spinner = binding.workoutSpinner
 
@@ -78,7 +78,7 @@ class ViewWorkoutsFragment : Fragment() {
 
     }
 
-    fun updateData(newQuery : String)  {
+    private fun updateData(newQuery : String)  {
 
         runBlocking {
             val workouts  =  WorkoutApi.retrofitService.getWorkout(newQuery)

@@ -27,13 +27,20 @@ class HomeSelectedWorkoutsFragment : Fragment() {
 
     private val groupedWorkouts : MutableList<MutableList<Workouts>> = mutableListOf();
 
-
     private val binding get() = _binding!!;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // load db
+        coroutineScope.launch {
+            val db  = AppDatabase.getDatabase(requireContext()).workoutData()
+            val allWorkouts = db.getAll();
+            workouts.clear()
+            workouts.addAll(allWorkouts)
+            groupWorkoutsByDate()
+        }
         // Inflate the layout for this fragment
         _binding = FragmentHomeSelectedWorkoutsBinding.inflate(inflater, container, false);
 
@@ -44,17 +51,6 @@ class HomeSelectedWorkoutsFragment : Fragment() {
 
         val rvSelectedWorkouts : RecyclerView = binding.rvSelectedWorkouts
 
-        coroutineScope.launch {
-
-            val db  = AppDatabase.getDatabase(requireContext()).workoutData()
-            val allWorkouts = db.getAll();
-            workouts.clear()
-            workouts.addAll(allWorkouts)
-
-            groupWorkoutsByDate()
-
-        }
-
         binding.btnViewWorkouts.setOnClickListener{
 
             val action  = HomeSelectedWorkoutsFragmentDirections.actionHomeSelectedWorkoutsFragmentToViewWorkoutsFragment()
@@ -64,7 +60,7 @@ class HomeSelectedWorkoutsFragment : Fragment() {
         }
 
         rvSelectedWorkouts.adapter = SelectedWorkoutsAdapter(requireContext(), groupedWorkouts);
-        rvSelectedWorkouts.setHasFixedSize(true);
+        rvSelectedWorkouts.setHasFixedSize(false);
         super.onViewCreated(view, savedInstanceState)
 
     }
@@ -72,6 +68,8 @@ class HomeSelectedWorkoutsFragment : Fragment() {
     fun groupWorkoutsByDate() {
 
         var workoutList = mutableListOf<Workouts>()
+
+        var tempGroupWorkouts : MutableList<MutableList<Workouts>> = mutableListOf();
 
         for(workout in workouts.orEmpty() ) {
 
@@ -82,8 +80,10 @@ class HomeSelectedWorkoutsFragment : Fragment() {
             } else {
 
                 if(workoutList.size > 0){
-                    groupedWorkouts.add(workoutList)
+
+                    tempGroupWorkouts.add(workoutList);
                     workoutList = mutableListOf()
+
                 }
                 workoutList.add(workout);
 
@@ -92,8 +92,13 @@ class HomeSelectedWorkoutsFragment : Fragment() {
         }
 
         if(workoutList.size > 0 ){
-            groupedWorkouts.add(workoutList);
+
+            tempGroupWorkouts.add(workoutList);
+
         }
+
+        groupedWorkouts.clear();
+        groupedWorkouts.addAll(tempGroupWorkouts)
 
     }
 
