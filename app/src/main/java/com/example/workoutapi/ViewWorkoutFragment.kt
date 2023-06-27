@@ -2,25 +2,23 @@ package com.example.workoutapi
 
 import android.app.ActionBar.LayoutParams
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.compose.ui.text.style.TextAlign
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.view.marginRight
 import androidx.core.view.setMargins
-import androidx.room.Database
+import androidx.fragment.app.Fragment
 import com.example.workoutapi.database.workout.AppDatabase
 import com.example.workoutapi.database.workout.entities.Workouts
 import com.example.workoutapi.databinding.FragmentViewWorkoutBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
+
 
 class ViewWorkoutFragment : Fragment() {
 
@@ -94,9 +92,6 @@ class ViewWorkoutFragment : Fragment() {
 
             linearLayoutContainer.orientation = LinearLayout.HORIZONTAL;
 
-            linearLayoutContainer.setBackgroundColor(1000)
-
-
             val marginParams  = LayoutParams(LayoutParams.MATCH_PARENT);
 
             marginParams.setMargins(50);
@@ -104,7 +99,6 @@ class ViewWorkoutFragment : Fragment() {
             val workoutNameTV  = TextView(requireContext())
             val workoutSetsTV  = TextView(requireContext());
             val workoutRepsTV = TextView(requireContext());
-
 
 
             workoutNameTV.textSize = 25f
@@ -120,13 +114,11 @@ class ViewWorkoutFragment : Fragment() {
             workoutRepsTV.text = it.reps.toString()
             workoutSetsTV.text = it.sets.toString()
 
+            workoutNameTV.maxWidth = 500;
 
             linearLayoutContainer.addView(workoutNameTV)
             linearLayoutContainer.addView(workoutRepsTV)
             linearLayoutContainer.addView(workoutSetsTV)
-
-
-
 
             container.addView(linearLayoutContainer);
 
