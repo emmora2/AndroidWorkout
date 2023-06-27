@@ -1,7 +1,5 @@
 package com.example.workoutapi
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,11 +36,19 @@ class WorkoutDateSelectionFragment : Fragment(), OnDateChangeListener {
 
     private lateinit var selectedWorkoutText : String;
 
+    private  var selectedWorkoutReps  = 0
+
+    private var selectedWorkoutSets = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+
+            selectedWorkoutReps = it.getInt("workoutReps")
+            selectedWorkoutSets = it.getInt("workoutSets")
             selectedWorkoutText = it.getString(workoutKey).toString()
+
         }
     }
 
@@ -101,7 +107,7 @@ class WorkoutDateSelectionFragment : Fragment(), OnDateChangeListener {
 
             val db : AppDatabase = AppDatabase.getDatabase(requireContext());
 
-            db.workoutData().insert(Workouts(null,workoutDate, workoutName))
+            db.workoutData().insert(Workouts(null,workoutDate, workoutName, selectedWorkoutReps, selectedWorkoutSets, false))
 
         }
     }

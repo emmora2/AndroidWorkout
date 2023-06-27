@@ -93,10 +93,4 @@ class ViewWorkoutsFragment : Fragment() {
 
     }
 
-
-
-
-
-
-
 }

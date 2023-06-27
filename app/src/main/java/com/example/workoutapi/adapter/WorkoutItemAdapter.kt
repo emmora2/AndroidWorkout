@@ -16,13 +16,14 @@ import com.example.workoutapi.models.Workouts
 class WorkoutItemAdapter(private val context : Context, private val dataSet: List<Workouts>) : RecyclerView.Adapter<WorkoutItemAdapter.ItemViewHolder>() {
 
     private  val intentKey : String  = "workoutName";
+
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+
         val textView : TextView = view.findViewById(R.id.tv_workout_name)
         val muscleGroupTextView : TextView = view.findViewById(R.id.tv_muscle_group)
         val addWorkoutBtn : Button = view.findViewById(R.id.btn_add_workout);
         val workoutReps : EditText = view.findViewById(R.id.et_workout_reps)
         val workoutSets : EditText = view.findViewById(R.id.et_workout_sets)
-
 
     }
 
@@ -44,13 +45,14 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
 
         holder.addWorkoutBtn.setOnClickListener{
 
-            val action = ViewWorkoutsFragmentDirections.actionViewWorkoutsFragmentToWorkoutDateSelectionFragment(workoutName = item.name);
+            val workoutReps = Integer.parseInt(holder.workoutReps.text.toString())
+            val workoutSets = Integer.parseInt(holder.workoutSets.text.toString())
 
+            val action = ViewWorkoutsFragmentDirections.actionViewWorkoutsFragmentToWorkoutDateSelectionFragment(workoutName = item.name, workoutReps = workoutReps, workoutSets = workoutSets);
             it.findNavController().navigate(action);
 
         }
 
     }
-
 
 }
