@@ -12,6 +12,9 @@ interface WorkoutsDao {
     @Query("SELECT * FROM workouts ORDER BY date ASC")
     fun getAll(): List<Workouts>
 
+    @Query("SELECT * FROM workouts where date = :date")
+    fun get(date : String): List<Workouts>
+
     @Insert
     fun insert(workouts: Workouts);
 
