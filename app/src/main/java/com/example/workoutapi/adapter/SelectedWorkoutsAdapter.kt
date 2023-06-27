@@ -6,15 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.workoutapi.HomeSelectedWorkoutsFragmentDirections
 import com.example.workoutapi.R
+import com.example.workoutapi.ViewWorkoutsFragmentDirections
 import com.example.workoutapi.database.workout.entities.Workouts
+import com.google.android.material.card.MaterialCardView
 
 class SelectedWorkoutsAdapter(val context : Context, private val dataset: MutableList<MutableList<Workouts>>) : RecyclerView.Adapter<SelectedWorkoutsAdapter.ItemViewHolder>() {
 
 
     class ItemViewHolder(private val view : View) : RecyclerView.ViewHolder(view){
 
+        val selectedWorkoutsContainer : MaterialCardView = view.findViewById(R.id.selected_workout_cards_container)
         val selectedWorkouts: LinearLayout = view.findViewById(R.id.selected_workouts);
 
     }
@@ -39,7 +44,12 @@ class SelectedWorkoutsAdapter(val context : Context, private val dataset: Mutabl
 
         val dateView  = TextView(holder.selectedWorkouts.context)
 
-        dateView.text = workouts[0].workoutDate
+
+        val dateString = workouts[0].workoutDate
+
+        dateView.text = dateString
+
+        setCardContainerClickListenerCard(holder, dateString)
 
         holder.selectedWorkouts.addView(dateView);
 
@@ -52,5 +62,16 @@ class SelectedWorkoutsAdapter(val context : Context, private val dataset: Mutabl
             holder.selectedWorkouts.addView(textView)
 
         }
+    }
+
+
+    private fun setCardContainerClickListenerCard(holder : ItemViewHolder, workoutDate : String){
+
+        holder.selectedWorkoutsContainer.setOnClickListener{
+
+            val action = HomeSelectedWorkoutsFragmentDirections.actionHomeSelectedWorkoutsFragmentToViewWorkoutFragment(workoutDate)
+            holder.itemView.findNavController().navigate(action);
+        }
+
     }
 }
