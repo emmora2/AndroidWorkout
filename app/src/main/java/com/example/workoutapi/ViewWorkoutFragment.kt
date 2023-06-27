@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.compose.ui.text.style.TextAlign
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.marginRight
 import androidx.core.view.setMargins
 import androidx.room.Database
@@ -37,11 +39,13 @@ class ViewWorkoutFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-
         arguments?.let { it ->
             workoutDate = it.getString(PARAMS);
         }
+        coroutineScope.launch {
+            getWorkouts(workoutDate!!);
 
+        }
 
 
     }
@@ -53,10 +57,7 @@ class ViewWorkoutFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentViewWorkoutBinding.inflate(inflater, container, false);
 
-        coroutineScope.launch {
-            getWorkouts(workoutDate!!);
-            createWorkoutViews();
-        }
+
 
         return binding.root
     }
@@ -65,8 +66,12 @@ class ViewWorkoutFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvWorkoutDateVWF.text = workoutDate;
+        if(_workouts != null){
+            createWorkoutViews();
 
+        }
+
+        binding.tvWorkoutDateVWF.text = workoutDate;
 
 
     }
@@ -81,21 +86,26 @@ class ViewWorkoutFragment : Fragment() {
 
     private fun createWorkoutViews(){
 
-        val container = binding.LLWorkoutContainerVWF
+        val container = binding.clViewWorkoutInsideContainer
 
         workouts.forEach{
 
-            val workoutContainer : LinearLayout = LinearLayout(requireContext())
+            val linearLayoutContainer = LinearLayout(requireContext());
+
+            linearLayoutContainer.orientation = LinearLayout.HORIZONTAL;
+
+            linearLayoutContainer.setBackgroundColor(1000)
+
+
             val marginParams  = LayoutParams(LayoutParams.MATCH_PARENT);
-            marginParams.setMargins(5);
 
-            workoutContainer.orientation = LinearLayout.HORIZONTAL
-            workoutContainer.layoutParams = marginParams
-
+            marginParams.setMargins(50);
 
             val workoutNameTV  = TextView(requireContext())
             val workoutSetsTV  = TextView(requireContext());
             val workoutRepsTV = TextView(requireContext());
+
+
 
             workoutNameTV.textSize = 25f
             workoutSetsTV.textSize = 25f;
@@ -110,11 +120,17 @@ class ViewWorkoutFragment : Fragment() {
             workoutRepsTV.text = it.reps.toString()
             workoutSetsTV.text = it.sets.toString()
 
-            workoutContainer.addView(workoutNameTV)
-            workoutContainer.addView(workoutRepsTV)
-            workoutContainer.addView(workoutSetsTV)
 
-            container.addView(workoutContainer);
+            linearLayoutContainer.addView(workoutNameTV)
+            linearLayoutContainer.addView(workoutRepsTV)
+            linearLayoutContainer.addView(workoutSetsTV)
+
+
+
+
+            container.addView(linearLayoutContainer);
+
+
 
         }
 

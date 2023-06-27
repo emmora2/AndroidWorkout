@@ -22,14 +22,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/LL_workout_container_VWF"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_workout_date_VWF"
+        android:id="@+id/cl_view_workout_inside_container"
+        android:layout_width="411dp"
+        android:layout_height="686dp"
+        android:layout_marginTop="44dp"
         android:orientation="vertical"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="36dp"></LinearLayout>
+        app:layout_constraintTop_toTopOf="@+id/tv_workout_date_VWF"
+        tools:context=".ViewWorkoutFragment"
+        tools:layout_editor_absoluteX="0dp">
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
