@@ -34,13 +34,7 @@ class HomeSelectedWorkoutsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // load db
-        coroutineScope.launch {
-            val db  = AppDatabase.getDatabase(requireContext()).workoutData()
-            val allWorkouts = db.getAll();
-            workouts.clear()
-            workouts.addAll(allWorkouts)
-            groupWorkoutsByDate()
-        }
+
         // Inflate the layout for this fragment
         _binding = FragmentHomeSelectedWorkoutsBinding.inflate(inflater, container, false);
 
@@ -50,6 +44,14 @@ class HomeSelectedWorkoutsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val rvSelectedWorkouts : RecyclerView = binding.rvSelectedWorkouts
+
+        coroutineScope.launch {
+            val db  = AppDatabase.getDatabase(requireContext()).workoutData()
+            val allWorkouts = db.getAll();
+            workouts.clear()
+            workouts.addAll(allWorkouts)
+            groupWorkoutsByDate()
+        }
 
         binding.btnViewWorkouts.setOnClickListener{
 
