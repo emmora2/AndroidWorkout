@@ -11,8 +11,8 @@
         android:label="fragment_view_workouts"
         tools:layout="@layout/fragment_view_workouts" >
         <action
-            android:id="@+id/action_viewWorkoutsFragment_to_workoutDateSelectionFragment"
-            app:destination="@id/workoutDateSelectionFragment" />
+            android:id="@+id/action_viewWorkoutsFragment_to_workoutConfirmation"
+            app:destination="@id/workoutConfirmation" />
     </fragment>
     <fragment
         android:id="@+id/homeSelectedWorkoutsFragment"
@@ -51,5 +51,14 @@
         <argument
             android:name="workoutDate"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutConfirmation"
+        android:name="com.example.workoutapi.WorkoutConfirmation"
+        android:label="fragment_workout_confirmation"
+        tools:layout="@layout/fragment_workout_confirmation" >
+        <action
+            android:id="@+id/action_workoutConfirmation_to_workoutDateSelectionFragment"
+            app:destination="@id/workoutDateSelectionFragment" />
     </fragment>
 </navigation>

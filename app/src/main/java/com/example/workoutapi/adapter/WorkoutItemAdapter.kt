@@ -7,16 +7,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapi.R
 import com.example.workoutapi.ViewWorkoutsFragmentDirections
+import com.example.workoutapi.models.SelectedWorkout
+import com.example.workoutapi.models.WorkoutListViewModel
 import com.example.workoutapi.models.Workouts
 
-class WorkoutItemAdapter(private val context : Context, private val dataSet: List<Workouts>) : RecyclerView.Adapter<WorkoutItemAdapter.ItemViewHolder>() {
+class WorkoutItemAdapter(private val context : Context, private val dataSet: List<Workouts>, private val workoutsViewModel : WorkoutListViewModel) : RecyclerView.Adapter<WorkoutItemAdapter.ItemViewHolder>() {
 
-    private  val intentKey : String  = "workoutName";
-
+    private val REPS_SETS_NOT_SET_MSG = "Please enter a number for reps and sets";
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         val textView : TextView = view.findViewById(R.id.tv_workout_name)
@@ -37,22 +42,45 @@ class WorkoutItemAdapter(private val context : Context, private val dataSet: Lis
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
-        val item = dataSet[position];
+        val workout = dataSet[position];
 
-        holder.textView.text = item.muscle;
+        holder.textView.text = workout.muscle;
 
-        holder.muscleGroupTextView.text = item.name
+        holder.muscleGroupTextView.text = workout.name
 
         holder.addWorkoutBtn.setOnClickListener{
 
-            val workoutReps = Integer.parseInt(holder.workoutReps.text.toString())
-            val workoutSets = Integer.parseInt(holder.workoutSets.text.toString())
+            if(verifyRepsSets(holder)){
 
-            val action = ViewWorkoutsFragmentDirections.actionViewWorkoutsFragmentToWorkoutDateSelectionFragment(workoutName = item.name, workoutReps = workoutReps, workoutSets = workoutSets);
-            it.findNavController().navigate(action);
+                val workoutReps = Integer.parseInt(holder.workoutReps.text.toString())
+                val workoutSets = Integer.parseInt(holder.workoutSets.text.toString())
 
+                val workoutSelected = SelectedWorkout(workout.name, workoutReps, workoutSets, 1);
+                workoutsViewModel.addWorkout(workoutSelected)
+
+            } else {
+
+                showMsgRepsSetsNotSet()
+            }
         }
 
+    }
+    private fun verifyRepsSets(holder : ItemViewHolder) : Boolean {
+
+        try {
+             Integer.parseInt(holder.workoutReps.text.toString())
+             Integer.parseInt(holder.workoutSets.text.toString())
+
+        } catch (e : NumberFormatException) {
+            return false;
+        }
+        return true;
+    }
+
+
+    private fun showMsgRepsSetsNotSet(){
+        val toast = Toast.makeText(context, REPS_SETS_NOT_SET_MSG, Toast.LENGTH_SHORT)
+        toast.show()
     }
 
 }

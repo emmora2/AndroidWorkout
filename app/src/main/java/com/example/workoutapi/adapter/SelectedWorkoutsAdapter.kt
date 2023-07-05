@@ -10,7 +10,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workoutapi.HomeSelectedWorkoutsFragmentDirections
 import com.example.workoutapi.R
-import com.example.workoutapi.ViewWorkoutsFragmentDirections
 import com.example.workoutapi.database.workout.entities.Workouts
 import com.google.android.material.card.MaterialCardView
 
@@ -44,7 +43,6 @@ class SelectedWorkoutsAdapter(val context : Context, private val dataset: Mutabl
 
         val dateView  = TextView(holder.selectedWorkouts.context)
 
-
         val dateString = workouts[0].workoutDate
 
         dateView.text = dateString
@@ -64,12 +62,12 @@ class SelectedWorkoutsAdapter(val context : Context, private val dataset: Mutabl
         }
     }
 
-
     private fun setCardContainerClickListenerCard(holder : ItemViewHolder, workoutDate : String){
 
         holder.selectedWorkoutsContainer.setOnClickListener{
 
             val action = HomeSelectedWorkoutsFragmentDirections.actionHomeSelectedWorkoutsFragmentToViewWorkoutFragment(workoutDate)
+
             holder.itemView.findNavController().navigate(action);
         }
 

@@ -1,5 +1,4 @@
 package com.example.workoutapi
-
 import android.app.ActionBar.LayoutParams
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +10,11 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.workoutapi.database.workout.AppDatabase
 import com.example.workoutapi.database.workout.entities.Workouts
 import com.example.workoutapi.databinding.FragmentViewWorkoutBinding
+import com.example.workoutapi.models.WorkoutListViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,33 +24,33 @@ import java.text.SimpleDateFormat
 
 class ViewWorkoutFragment : Fragment() {
 
-    private val COMPLETED_TOAST = "Completed all workouts!";
+    private val sharedViewModel : WorkoutListViewModel by activityViewModels()
+
+    companion object{
+
+        private const val COMPLETED_TOAST = "Completed all workouts!";
+        private val PARAMS1 : String = "workoutDate"
+
+    }
+
 
     private var _binding : FragmentViewWorkoutBinding? = null
-
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
     private val binding get() = _binding!!;
-
-    private val PARAMS : String = "workoutDate"
-
     private  var workoutDate : String? = null
-
     private lateinit var formattedWorkoutDate : String ;
-
     private var _workouts : List<Workouts>? = null ;
     private val workouts get() = _workouts!!;
-
     private val checkBoxesCompletedWorkout = mutableListOf<CheckBox>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         arguments?.let { it ->
-            workoutDate = it.getString(PARAMS).toString()
+            workoutDate = it.getString(PARAMS1).toString()
 
-            formattedWorkoutDate = formatDate(it.getString(PARAMS).toString());
+            formattedWorkoutDate = formatDate(it.getString(PARAMS1).toString());
         }
-
 
 
     }
@@ -134,8 +135,6 @@ class ViewWorkoutFragment : Fragment() {
             workoutNameTV.width = 500
             workoutNameTV.maxLines = 1
             workoutNameTV.canScrollHorizontally(1)
-
-
 
             linearLayoutContainer.addView(workoutNameTV)
             linearLayoutContainer.addView(workoutRepsTV)

@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.workoutapi.database.workout.AppDatabase
 import com.example.workoutapi.database.workout.entities.Workouts
 import com.example.workoutapi.databinding.FragmentWorkoutDateSelectionBinding
+import com.example.workoutapi.models.WorkoutListViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,6 +41,9 @@ class WorkoutDateSelectionFragment : Fragment(), OnDateChangeListener {
     private  var selectedWorkoutReps  = 0
 
     private var selectedWorkoutSets = 0
+
+    private val sharedViewModel : WorkoutListViewModel by activityViewModels()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,7 +112,7 @@ class WorkoutDateSelectionFragment : Fragment(), OnDateChangeListener {
 
             val db : AppDatabase = AppDatabase.getDatabase(requireContext());
 
-            db.workoutData().insert(Workouts(null,workoutDate, workoutName, selectedWorkoutReps, selectedWorkoutSets, false))
+            db.workoutData().insert(Workouts(null,workoutDate, 1, workoutName, selectedWorkoutReps, selectedWorkoutSets, false))
 
         }
     }

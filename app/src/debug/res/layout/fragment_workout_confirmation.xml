@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/ll_selected_workouts_FWC"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".WorkoutConfirmation"
+        tools:layout_editor_absoluteX="4dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textStyle="@attr/font-main"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/confirmation_fragment_title"
+            android:textSize="24dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save_workouts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_margin="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_selected_workouts_FWC" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

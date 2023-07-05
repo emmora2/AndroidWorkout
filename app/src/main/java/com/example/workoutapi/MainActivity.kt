@@ -2,10 +2,14 @@ package com.example.workoutapi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.workoutapi.models.WorkoutListViewModel
+import androidx.fragment.app.activityViewModels
 
 class MainActivity : AppCompatActivity() {
+
 
     private lateinit var navController : NavController;
     override fun onCreate(savedInstanceState: Bundle?) {
